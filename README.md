@@ -1,7 +1,6 @@
 # Sugtype
 
 [![dependency status](https://deps.rs/repo/github/JADSN/sugtype/status.svg)](https://deps.rs/repo/github/JADSN/sugtype)
-https://github.com/JADSN/sugtype
 ### Suggest better types for a given dataset
 
 ## Precedence
