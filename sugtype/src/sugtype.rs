@@ -1,4 +1,4 @@
-fn obtain_better_type(input: &str) -> Result<String, Box<dyn std::error::Error>> {
+pub fn obtain_better_type(input: &str) -> Result<String, Box<dyn std::error::Error>> {
     // * ======================
     // * === BEGIN: boolean ===
     // * ======================
@@ -121,77 +121,4 @@ fn obtain_better_type(input: &str) -> Result<String, Box<dyn std::error::Error>>
     // * ==================
 
     Ok(String::default())
-}
-
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let input_min_u8 = u8::MIN.to_string();
-    let input_max_u8 = u8::MAX.to_string();
-
-    let better_type_input_min_u8 = obtain_better_type(&input_min_u8)?;
-    let better_type_input_max_u8 = obtain_better_type(&input_max_u8)?;
-
-    println!(
-        "MIN: {} Better type: {}",
-        input_min_u8, better_type_input_min_u8
-    );
-
-    println!(
-        "MAX: {} Better type: {}",
-        input_max_u8, better_type_input_max_u8
-    );
-
-    assert_eq!(better_type_input_min_u8, "u8");
-    assert_eq!(better_type_input_max_u8, "u8");
-
-    println!();
-    println!("================================================================");
-    println!();
-
-    let input_min_u16 = u16::MIN.to_string();
-    let input_max_u16 = u16::MAX.to_string();
-
-    let better_type_input_min_u16 = obtain_better_type(&input_min_u16)?;
-    let better_type_input_max_u16 = obtain_better_type(&input_max_u16)?;
-
-    println!(
-        "MIN: {} - Better type: {}",
-        input_min_u16, better_type_input_min_u16
-    );
-
-    println!(
-        "MAX: {} - Better type: {}",
-        input_max_u16, better_type_input_max_u16
-    );
-
-    assert_eq!(better_type_input_min_u16, "u8");
-    assert_eq!(better_type_input_max_u16, "u16");
-
-    println!();
-    println!("================================================================");
-    println!();
-
-    let input_min_u32 = u32::MIN.to_string();
-    let input_max_u32 = u32::MAX.to_string();
-
-    let better_type_input_min_u32 = obtain_better_type(&input_min_u32)?;
-    let better_type_input_max_u32 = obtain_better_type(&input_max_u32)?;
-
-    println!(
-        "MIN: {} - Better type: {}",
-        input_min_u32, better_type_input_min_u32
-    );
-
-    println!(
-        "MAX: {} - Better type: {}",
-        input_max_u32, better_type_input_max_u32
-    );
-
-    assert_eq!(better_type_input_min_u32, "u8");
-    assert_eq!(better_type_input_max_u32, "u32");
-
-    println!();
-    println!("================================================================");
-    println!();
-
-    Ok(())
 }

@@ -31,6 +31,8 @@
 ## Todos
 
 - [ ] **`f32`** and **`f64`** boundaries;
+- [ ] Define *keyworks* in `Cargo.toml`
+- [ ] Check licencies
 
 ## Alternatives
 
