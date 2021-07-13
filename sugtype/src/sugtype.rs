@@ -1,124 +1,140 @@
-pub fn obtain_better_type(input: &str) -> Result<String, Box<dyn std::error::Error>> {
-    // * ======================
-    // * === BEGIN: boolean ===
-    // * ======================
-    let is_boolean = input.parse::<bool>().is_ok();
-    if is_boolean {
-        return Ok(String::from("bool"));
+pub struct Sugtype;
+
+impl Sugtype {
+    pub fn new() -> Self {
+        Self
     }
 
-    // * =======================
-    // * === BEGIN: unsigned ===
-    // * =======================
+    pub fn obtain_better_type(input: &str) -> Result<&str, Box<dyn std::error::Error>> {
+        use super::mintype::MinType;
 
-    // ?: Check Min of u16 berfore min of u8:
-    // ?: - Override min of u16 from 0 to 256;
-    // ?: - Don't suggest when input is equal to 0, the type u16;
+        let mut types_parsed = vec![];
 
-    let u16_parsed = input.parse::<u16>();
+        // * ======================
+        // * === BEGIN: boolean ===
+        // * ======================
+        let is_boolean = input.parse::<bool>().is_ok();
+        if is_boolean {
+            types_parsed.push("bool");
+        }
 
-    let is_u8 = input.parse::<u8>().is_ok();
-    if is_u8 {
-        return Ok(String::from("u8"));
+        // * =======================
+        // * === BEGIN: unsigned ===
+        // * =======================
+
+        // ?: Check Min of u16 berfore min of u8:
+        // ?: - Override min of u16 from 0 to 256;
+        // ?: - Don't suggest when input is equal to 0, the type u16;
+
+        let u16_parsed = input.parse::<u16>();
+
+        let is_u8 = input.parse::<u8>().is_ok();
+
+        if is_u8 {
+            types_parsed.push("u8");
+        }
+
+        let is_u16 = u16_parsed.is_ok();
+        if is_u16 {
+            types_parsed.push("u16");
+        }
+
+        let is_u32 = input.parse::<u32>().is_ok();
+        if is_u32 {
+            types_parsed.push("u32");
+        }
+
+        let is_u64 = input.parse::<u64>().is_ok();
+        if is_u64 {
+            types_parsed.push("u64");
+        }
+
+        let is_u128 = input.parse::<u128>().is_ok();
+        if is_u128 {
+            types_parsed.push("u128");
+        }
+
+        let is_usize = input.parse::<usize>().is_ok();
+        if is_usize {
+            types_parsed.push("usize");
+        }
+
+        // * =====================
+        // * === END: unsigned ===
+        // * =====================
+
+        // * ======================
+        // * === BEGIN: signed ===
+        // * ======================
+
+        let is_i8 = input.parse::<i8>().is_ok();
+        if is_i8 {
+            types_parsed.push("i8");
+        }
+
+        let is_i16 = input.parse::<i16>().is_ok();
+        if is_i16 {
+            types_parsed.push("i16");
+        }
+
+        let is_i32 = input.parse::<i32>().is_ok();
+        if is_i32 {
+            types_parsed.push("i32");
+        }
+
+        let is_i64 = input.parse::<i64>().is_ok();
+        if is_i64 {
+            types_parsed.push("i64");
+        }
+
+        let is_i128 = input.parse::<i128>().is_ok();
+        if is_i128 {
+            types_parsed.push("i128");
+        }
+
+        let is_isize = input.parse::<isize>().is_ok();
+        if is_isize {
+            types_parsed.push("isize");
+        }
+
+        // * ===================
+        // * === END: signed ===
+        // * ===================
+
+        // * ==================
+        // * == BEGIN: float ==
+        // * ==================
+
+        let is_f32 = input.parse::<f32>().is_ok();
+        if is_f32 {
+            types_parsed.push("f32");
+        }
+
+        let is_f64 = input.parse::<f64>().is_ok();
+        if is_f64 {
+            types_parsed.push("f64");
+        }
+
+        // * ==================
+        // * === END: float ===
+        // * ==================
+
+        // * =================
+        // * = BEGIN: String =
+        // * =================
+
+        let is_string = input.parse::<String>().is_ok();
+        if is_string {
+            types_parsed.push("String");
+        }
+
+        // * ==================
+        // * === END: String ==
+        // * ==================
+
+        // #[cfg(debug_assertions)]
+        // println!("{:#?}", types_parsed);
+
+        Ok(MinType::mintype(types_parsed))
     }
-
-    let is_u16 = u16_parsed.is_ok();
-    if is_u16 {
-        return Ok(String::from("u16"));
-    }
-
-    let is_u32 = input.parse::<u32>().is_ok();
-    if is_u32 {
-        return Ok(String::from("u32"));
-    }
-
-    let is_u64 = input.parse::<u64>().is_ok();
-    if is_u64 {
-        return Ok(String::from("u64"));
-    }
-
-    let is_u128 = input.parse::<u128>().is_ok();
-    if is_u128 {
-        return Ok(String::from("u128"));
-    }
-
-    let is_usize = input.parse::<usize>().is_ok();
-    if is_usize {
-        return Ok(String::from("usize"));
-    }
-
-    // * =====================
-    // * === END: unsigned ===
-    // * =====================
-
-    // * ======================
-    // * === BEGIN: signed ===
-    // * ======================
-
-    let is_i8 = input.parse::<i8>().is_ok();
-    if is_i8 {
-        return Ok(String::from("i8"));
-    }
-
-    let is_i16 = input.parse::<i16>().is_ok();
-    if is_i16 {
-        return Ok(String::from("i16"));
-    }
-
-    let is_i32 = input.parse::<i32>().is_ok();
-    if is_i32 {
-        return Ok(String::from("i32"));
-    }
-
-    let is_i64 = input.parse::<i64>().is_ok();
-    if is_i64 {
-        return Ok(String::from("i64"));
-    }
-
-    let is_i128 = input.parse::<i128>().is_ok();
-    if is_i128 {
-        return Ok(String::from("i128"));
-    }
-
-    let is_isize = input.parse::<isize>().is_ok();
-    if is_isize {
-        return Ok(String::from("isize"));
-    }
-
-    // * ===================
-    // * === END: signed ===
-    // * ===================
-
-    // * ==================
-    // * == BEGIN: float ==
-    // * ==================
-
-    let is_f32 = input.parse::<f32>().is_ok();
-    if is_f32 {
-        return Ok(String::from("f32"));
-    }
-
-    let is_f64 = input.parse::<f64>().is_ok();
-    if is_f64 {
-        return Ok(String::from("f64"));
-    }
-
-    // * ==================
-    // * === END: float ===
-    // * ==================
-
-    // * =================
-    // * = BEGIN: String =
-    // * =================
-
-    let is_string = input.parse::<String>().is_ok();
-    if is_string {
-        return Ok(String::from("String"));
-    }
-
-    // * ==================
-    // * === END: String ==
-    // * ==================
-
-    Ok(String::default())
 }
