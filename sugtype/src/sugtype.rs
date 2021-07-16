@@ -5,8 +5,11 @@ impl Sugtype {
         Self
     }
 
-    pub fn obtain_better_type(input: &str) -> Result<&str, Box<dyn std::error::Error>> {
+    pub fn obtain_better_type(input: String) -> Result<String, Box<dyn std::error::Error>> {
         use super::mintype::MinType;
+
+        let input = input.as_str();
+        // println!("Input: {:?}", input);
 
         let mut types_parsed = vec![];
 
@@ -21,10 +24,6 @@ impl Sugtype {
         // * =======================
         // * === BEGIN: unsigned ===
         // * =======================
-
-        // ?: Check Min of u16 berfore min of u8:
-        // ?: - Override min of u16 from 0 to 256;
-        // ?: - Don't suggest when input is equal to 0, the type u16;
 
         let u16_parsed = input.parse::<u16>();
 
@@ -135,6 +134,6 @@ impl Sugtype {
         // #[cfg(debug_assertions)]
         // println!("{:#?}", types_parsed);
 
-        Ok(MinType::mintype(types_parsed))
+        Ok(MinType::mintype(types_parsed).to_string())
     }
 }
