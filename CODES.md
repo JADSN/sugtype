@@ -37,3 +37,23 @@ for item in arr.iter().take(1) {
 }
 
 ```
+
+## Inspect 
+```rust
+
+.inspect(|x| {
+    #[cfg(debug_assertions)]
+    println!("{:?}", x);
+})
+
+```
+
+## All rust types
+```rust
+
+let mut all_rust_types = vec![
+    "u8", "u16", "u32", "u64", "u128", "i8", "i16", "i32", "i64", "i128", "f32", "f64",
+    "usize", "isize", "String",
+];
+
+```

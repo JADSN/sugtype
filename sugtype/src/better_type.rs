@@ -1,9 +1,9 @@
 use std::fmt::Display;
 
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, Clone, PartialEq)]
 pub struct BetterType {
-    key: String,
-    value: String,
+    pub key: String,
+    pub value: String,
 }
 
 impl BetterType {

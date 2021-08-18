@@ -1,9 +1,65 @@
+use std::{
+    collections::{HashMap, HashSet},
+    path::Path,
+};
+
+use serde::de;
+use serde_json::Value;
+
+use crate::{better_type::BetterType, datavec::DataVec};
+
 pub struct Sugtype;
+
+// #[derive(Debug, Hash, Eq, PartialEq)]
+// pub struct DataValue {
+//     key: String,
+//     value: u8,
+// }
+
+// impl DataValue {
+//     fn new(key: String, value: u8) -> Self {
+//         Self { key, value }
+//     }
+// }
+
+// #[derive(Debug, Default)]
+// pub struct Data {
+//     key: String,
+//     value: HashSet<DataValue>,
+// }
+
+// impl Data {
+//     fn new(key: String, value: HashSet<DataValue>) -> Self {
+//         Self { key, value }
+//     }
+
+//     fn add_data(&mut self, new_data: DataValue) {
+//         self.value.insert(new_data);
+//     }
+// }
 
 impl Sugtype {
     pub fn new() -> Self {
         Self
     }
+
+    // pub fn obtain_key_type_count(
+    //     key: String,
+    //     value: Value,
+    // ) -> Result<Data, Box<dyn std::error::Error>> {
+    //     let data_value = value.to_string();
+
+    //     let better_type = Sugtype::obtain_better_type(data_value)?;
+
+    //     let dv = DataValue::new(better_type, 0);
+
+    //     let mut dt = HashSet::<DataValue>::new();
+    //     dt.insert(dv);
+
+    //     let data = Data::new(key, dt);
+
+    //     Ok(data)
+    // }
 
     pub fn obtain_better_type(input: String) -> Result<String, Box<dyn std::error::Error>> {
         use super::mintype::MinType;
@@ -136,4 +192,6 @@ impl Sugtype {
 
         Ok(MinType::mintype(types_parsed).to_string())
     }
+
+    // String, File, Deserializable
 }

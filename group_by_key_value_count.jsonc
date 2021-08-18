@@ -1,0 +1,15 @@
+// * Obter quantidade total de ocorrências para cada tipo de  determinada key -  counter_by_key_type()
+{
+    "bts": [
+        {
+            "directed_by": [
+                {
+                    "string": 123
+                },
+                {
+                    "u16": 1
+                }
+            ]
+        }
+    ]
+}
